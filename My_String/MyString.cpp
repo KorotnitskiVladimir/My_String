@@ -30,6 +30,13 @@ MyString::MyString(const MyString& obj)
     strcpy_s(this->str, strlen(obj.str)+1, obj.str);
 }
 
+MyString::MyString(MyString&& obj)
+{
+    this->str = new char[strlen(obj.str)+1];
+    this->str = obj.str;
+    obj.str = nullptr;
+}
+
 void MyString::setString()
 {
     cout << "enter string -> " << endl;
@@ -50,12 +57,16 @@ void MyString::setString()
 
 char* MyString::getString() const
 {
-    return str;
+    if (str)
+        return str;
 }
 
 void MyString::print() const
 {
-    cout << str << endl;
+    if (str)
+        cout << str << endl;
+    else
+        cout << "nullptr" << endl;
 }
 
 void MyString::MyStrcpy(const MyString& obj)
@@ -337,6 +348,17 @@ MyString& MyString::operator=(const char* s)
         delete [] str;
     str = new char[strlen(s)+1];
     strcpy_s(str, strlen(s)+1, s);
+
+    return *this;
+}
+
+MyString& MyString::operator=(MyString&& obj)
+{
+    if (this->str)
+        delete [] this->str;
+    this->str = new char[strlen(obj.str)+1];
+    this->str = obj.str;
+    obj.str = nullptr;
 
     return *this;
 }

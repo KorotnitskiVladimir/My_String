@@ -10,6 +10,7 @@ public:
     MyString(int n);
     ~MyString();
     MyString(const MyString &obj);
+    MyString(MyString &&obj);
     void setString();
     char* getString() const;
     void print() const;
@@ -35,5 +36,6 @@ public:
     MyString operator+ (const char* s);
     MyString& operator= (const MyString &obj);
     MyString& operator= (const char* s);
+    MyString& operator= (MyString &&obj);
 };
 

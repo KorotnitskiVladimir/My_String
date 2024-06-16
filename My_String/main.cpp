@@ -18,6 +18,12 @@ int main(int argc, char* argv[])
     s2.print();
     s3.print();
     s4.print();
+    MyString s5(move(s4));
+    s5.print();
+    s4.print();
+    s4 = move(s5);
+    s4.print();
+    s5.print();
     
     return 0;
 }
